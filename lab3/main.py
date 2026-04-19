@@ -1,6 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import matplotlib
+import numpy as np
 matplotlib.use('Agg')
 
 
@@ -70,7 +71,7 @@ def polynomial(x_val, coef):
 
 def variance(y_true, y_approx):
     n = len(y_true)
-    return sum((y_true[i] - y_approx[i]) ** 2 for i in range(n)) / n
+    return np.sqrt(sum((y_true[i] - y_approx[i]) ** 2 for i in range(n))) / n + 1
 
 
 csv_data = """Month,Temp

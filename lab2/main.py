@@ -70,11 +70,11 @@ def generate_nodes(x_orig, y_orig, n_nodes):
 
 
 csv_data = """objects,fps
-100,120
-200,110
-400,90
-800,65
-1600,40
+500,120
+1000,110
+1500,90
+2000,65
+2500,40
 """
 with open('data.csv', 'w') as f:
     f.write(csv_data)
