@@ -1,14 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-np.random.seed(42)          # для відтворюваності
+np.random.seed(42)          
 n = 100
 eps_target = 1e-14
-
-# =============================================
-# 1. Генерація матриці A та вектора B
-# =============================================
-print("1. Генерація матриці A та вектора B...")
 
 A = np.random.uniform(-1, 1, (n, n))
 for i in range(n):
@@ -21,11 +16,6 @@ B = A @ x_true
 np.savetxt('A.txt', A, fmt='%.15f')
 np.savetxt('B.txt', B, fmt='%.15f')
 
-print("   Матриця A та вектор B успішно згенеровані та збережені у файли A.txt і B.txt")
-
-# =============================================
-# Допоміжні функції (точно за вимогами лабораторної)
-# =============================================
 def read_matrix(filename):
     return np.loadtxt(filename)
 
@@ -41,9 +31,6 @@ def vector_norm(x):
 def matrix_norm(A):
     return np.max(np.sum(np.abs(A), axis=1))
 
-# =============================================
-# Метод простої ітерації + історія збіжності
-# =============================================
 def simple_iteration_method(A, b, x0, tau, eps=1e-14, max_iter=20000, return_history=False):
     n = len(b)
     C = np.eye(n) - tau * A
@@ -62,9 +49,6 @@ def simple_iteration_method(A, b, x0, tau, eps=1e-14, max_iter=20000, return_his
     residual = vector_norm(matrix_vector_product(A, x) - b)
     return (x, max_iter, residual, history) if return_history else (x, max_iter, residual)
 
-# =============================================
-# Метод Якобі + історія збіжності
-# =============================================
 def jacobi_method(A, b, x0, eps=1e-14, max_iter=20000, return_history=False):
     n = len(b)
     D_inv = np.diag(1.0 / np.diag(A))
@@ -83,9 +67,6 @@ def jacobi_method(A, b, x0, eps=1e-14, max_iter=20000, return_history=False):
     residual = vector_norm(matrix_vector_product(A, x) - b)
     return (x, max_iter, residual, history) if return_history else (x, max_iter, residual)
 
-# =============================================
-# Метод Зейделя + історія збіжності
-# =============================================
 def seidel_method(A, b, x0, eps=1e-14, max_iter=20000, return_history=False):
     n = len(b)
     x = x0.copy()
@@ -132,9 +113,6 @@ print(f"Метод Зейделя          : {it_seidel:3d} ітерацій, н
 print("\nПерші 5 компонент розв’язку (метод Зейделя):")
 print(np.round(x_seidel[:5], decimals=10))
 
-# =============================================
-# Графіки для звіту
-# =============================================
 plt.figure(figsize=(10, 6))
 plt.semilogy(range(1, len(hist_simple)+1), hist_simple, 'b-', linewidth=2, label='Проста ітерація')
 plt.semilogy(range(1, len(hist_jacobi)+1), hist_jacobi, 'g-', linewidth=2, label='Якобі')

@@ -4,16 +4,12 @@ n = 100
 np.random.seed(42)
 eps_target = 1e-14
 
-print("1. Генерація матриці A та вектора B...")
-
 A = np.random.rand(n, n) * 10 - 5
 X_true = np.full(n, 2.5)
 B = A @ X_true
 
 np.savetxt('A.txt', A, fmt='%.8f')
 np.savetxt('B.txt', B, fmt='%.8f')
-
-print(f"   Матриця A {n}x{n} та вектор B збережені у файли A.txt і B.txt")
 
 def lu_decomposition(A):
     n = len(A)
@@ -46,7 +42,7 @@ def back_substitution(U, y):
     return x
 
 
-print("\n3. LU-розклад та розв'язок системи...")
+print("\n3. LU-розклад та розв'язок системи ")
 
 L, U = lu_decomposition(A)
 
@@ -79,6 +75,3 @@ print(f"   Фінальна нев'язка: {current_res:.2e}")
 np.savetxt('L.txt', L, fmt='%.8f')
 np.savetxt('U.txt', U, fmt='%.8f')
 np.savetxt('X_solution.txt', X0, fmt='%.10f')
-
-print("\nГотово! LU-розклад збережено у файли L.txt та U.txt")
-print("Розв'язок збережено у X_solution.txt")
